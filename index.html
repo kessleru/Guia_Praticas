@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini-Curso Docker - SNCT 2025</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-banner">
+                <img src="snct-banner.png" alt="22ª Semana Nacional de Ciência & Tecnologia - 20 e 21 de Outubro de 2025" class="event-banner">
+            </div>
+            <div class="header-content">
+                <h1>Mini-Curso Docker</h1>
+                <p class="instructor">Instrutor: <strong>Otávio Kessler Ustra</strong></p>
+                <p class="campus-info">IFTM Campus Ituiutaba</p>
+            </div>
+        </div>
+    </header>
+
+    <nav class="navbar">
+        <div class="container">
+            <ul>
+                <li><a href="#comandos-basicos">Comandos Básicos</a></li>
+                <li><a href="#gerenciamento">Containers</a></li>
+                <li><a href="#imagens">Imagens</a></li>
+                <li><a href="#praticas">Práticas</a></li>
+                <li><a href="#referencias">Links</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Comandos Básicos -->
+        <section id="comandos-basicos" class="section">
+            <h2>Comandos Básicos do Docker</h2>
+            
+            <div class="command-card">
+                <h3>docker run</h3>
+                <div class="command-box">
+                    <code>docker run [opções] imagem [comando]</code>
+                    <button class="copy-btn" onclick="copyToClipboard('docker run')">📋 Copiar</button>
+                </div>
+                <p class="description">Cria e inicia um container. Por exemplo, <code class="inline-code">docker run hello-world</code> executa um container que imprime uma mensagem de boas-vindas.</p>
+                <div class="examples">
+                    <h4>Exemplos:</h4>
+                    <div class="example-item">
+                        <code>docker run hello-world</code>
+                        <span class="example-desc">Executa container de teste</span>
+                    </div>
+                    <div class="example-item">
+                        <code>docker run -it python bash</code>
+                        <span class="example-desc">Executa Python interativamente</span>
+                    </div>
+                    <div class="example-item">
+                        <code>docker run -d nginx</code>
+                        <span class="example-desc">Executa Nginx em background</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="command-card">
+                <h3>docker pull</h3>
+                <div class="command-box">
+                    <code>docker pull nome-da-imagem[:tag]</code>
+                    <button class="copy-btn" onclick="copyToClipboard('docker pull')">📋 Copiar</button>
+                </div>
+                <p class="description">Baixa uma imagem Docker do Docker Hub ou de outro registro. Por exemplo, <code class="inline-code">docker pull ubuntu</code> baixa a imagem mais recente do Ubuntu.</p>
+                <div class="examples">
+                    <h4>Exemplos:</h4>
+                    <div class="example-item">
+                        <code>docker pull ubuntu</code>
+                        <span class="example-desc">Baixa última versão do Ubuntu</span>
+                    </div>
+                    <div class="example-item">
+                        <code>docker pull python:3.9</code>
+                        <span class="example-desc">Baixa Python versão 3.9</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="command-card">
+                <h3>docker build</h3>
+                <div class="command-box">
+                    <code>docker build -t nome-imagem:tag .</code>
+                    <button class="copy-btn" onclick="copyToClipboard('docker build')">📋 Copiar</button>
+                </div>
+                <p class="description">Constrói uma imagem Docker a partir de um Dockerfile. Este comando é fundamental no processo de criação de imagens personalizadas.</p>
+                <div class="examples">
+                    <h4>Exemplos:</h4>
+                    <div class="example-item">
+                        <code>docker build -t minha-app:1.0 .</code>
+                        <span class="example-desc">Constrói imagem com tag</span>
+                    </div>
+                    <div class="example-item">
+                        <code>docker build -f Dockerfile.prod -t app:prod .</code>
+                        <span class="example-desc">Usa Dockerfile específico</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gerenciamento de Containers -->
+        <section id="gerenciamento" class="section">
+            <h2>Gerenciamento de Containers</h2>
+            
+            <div class="command-card">
+                <h3>docker ps</h3>
+                <div class="command-box">
+                    <code>docker ps [opções]</code>
+                    <button class="copy-btn" onclick="copyToClipboard('docker ps')">📋 Copiar</button>
+                </div>
+                <p class="description">Lista todos os containers em execução. Com opções adicionais, também é possível ver containers parados.</p>
+                <div class="examples">
+                    <h4>Exemplos:</h4>
+                    <div class="example-item">
+                        <code>docker ps</code>
+                        <span class="example-desc">Lista containers em execução</span>
+                    </div>
+                    <div class="example-item">
+                        <code>docker ps -a</code>
+                        <span class="example-desc">Lista todos os containers (inclusive parados)</span>
+                    </div>
+                    <div class="example-item">
+                        <code>docker ps -q</code>
+                        <span class="example-desc">Lista apenas IDs dos containers</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="command-card">
+                <h3>docker start</h3>
+                <div class="command-box">
+                    <code>docker start &lt;id-ou-nome&gt;</code>
+                    <button class="copy-btn" onclick="copyToClipboard('docker start')">📋 Copiar</button>
+                </div>
+                <p class="description">Inicia um container parado.</p>
+                <div class="examples">
+                    <h4>Exemplos:</h4>
+                    <div class="example-item">
+                        <code>docker start meu-container</code>
+                        <span class="example-desc">Inicia container pelo nome</span>
+                    </div>
+                    <div class="example-item">
+                        <code>docker start a1b2c3d4</code>
+                        <span class="example-desc">Inicia container pelo ID</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="command-card">
+                <h3>docker stop</h3>
+                <div class="command-box">
+                    <code>docker stop &lt;id-ou-nome&gt;</code>
+                    <button class="copy-btn" onclick="copyToClipboard('docker stop')">📋 Copiar</button>
+                </div>
+                <p class="description">Para um container em execução, seguido do ID ou nome do container.</p>
+                <div class="examples">
+                    <h4>Exemplos:</h4>
+                    <div class="example-item">
+                        <code>docker stop meu-container</code>
+                        <span class="example-desc">Para container pelo nome</span>
+                    </div>
+                    <div class="example-item">
+                        <code>docker stop $(docker ps -q)</code>
+                        <span class="example-desc">Para todos os containers em execução</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="command-card">
+                <h3>docker rm</h3>
+                <div class="command-box">
+                    <code>docker rm &lt;id-ou-nome&gt;</code>
+                    <button class="copy-btn" onclick="copyToClipboard('docker rm')">📋 Copiar</button>
+                </div>
+                <p class="description">Remove um ou mais containers. É importante garantir que o container esteja parado antes de tentar removê-lo.</p>
+                <div class="examples">
+                    <h4>Exemplos:</h4>
+                    <div class="example-item">
+                        <code>docker rm meu-container</code>
+                        <span class="example-desc">Remove container</span>
+                    </div>
+                    <div class="example-item">
+                        <code>docker rm -f meu-container</code>
+                        <span class="example-desc">Força remoção de container em execução</span>
+                    </div>
+                    <div class="example-item">
+                        <code>docker rm $(docker ps -aq)</code>
+                        <span class="example-desc">Remove todos os containers parados</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="command-card">
+                <h3>docker exec</h3>
+                <div class="command-box">
+                    <code>docker exec -it &lt;id&gt; bash</code>
+                    <button class="copy-btn" onclick="copyToClipboard('docker exec -it')">📋 Copiar</button>
+                </div>
+                <p class="description">Entra no terminal (bash) de um container em execução. Permite executar comandos dentro do container.</p>
+                <div class="examples">
+                    <h4>Exemplos:</h4>
+                    <div class="example-item">
+                        <code>docker exec -it meu-container bash</code>
+                        <span class="example-desc">Acessa bash do container</span>
+                    </div>
+                    <div class="example-item">
+                        <code>docker exec meu-container ls -la</code>
+                        <span class="example-desc">Executa comando específico</span>
+                    </div>
+                    <div class="example-item">
+                        <code>docker exec -it meu-container sh</code>
+                        <span class="example-desc">Acessa shell (para Alpine Linux)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trabalhando com Imagens -->
+        <section id="imagens" class="section">
+            <h2>Trabalhando com Imagens Docker</h2>
+            
+            <div class="command-card">
+                <h3>docker images</h3>
+                <div class="command-box">
+                    <code>docker images</code>
+                    <button class="copy-btn" onclick="copyToClipboard('docker images')">📋 Copiar</button>
+                </div>
+                <p class="description">Lista todas as imagens Docker disponíveis localmente.</p>
+                <div class="examples">
+                    <h4>Exemplos:</h4>
+                    <div class="example-item">
+                        <code>docker images</code>
+                        <span class="example-desc">Lista todas as imagens</span>
+                    </div>
+                    <div class="example-item">
+                        <code>docker images -q</code>
+                        <span class="example-desc">Lista apenas IDs das imagens</span>
+                    </div>
+                    <div class="example-item">
+                        <code>docker images --filter "dangling=true"</code>
+                        <span class="example-desc">Lista imagens órfãs</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="command-card">
+                <h3>docker rmi</h3>
+                <div class="command-box">
+                    <code>docker rmi &lt;id-da-imagem&gt;</code>
+                    <button class="copy-btn" onclick="copyToClipboard('docker rmi')">📋 Copiar</button>
+                </div>
+                <p class="description">Remove uma imagem local, seguido do ID da imagem.</p>
+                <div class="examples">
+                    <h4>Exemplos:</h4>
+                    <div class="example-item">
+                        <code>docker rmi ubuntu:20.04</code>
+                        <span class="example-desc">Remove imagem específica</span>
+                    </div>
+                    <div class="example-item">
+                        <code>docker rmi -f a1b2c3d4</code>
+                        <span class="example-desc">Força remoção da imagem</span>
+                    </div>
+                    <div class="example-item">
+                        <code>docker rmi $(docker images -q)</code>
+                        <span class="example-desc">Remove todas as imagens</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="command-card">
+                <h3>docker tag</h3>
+                <div class="command-box">
+                    <code>docker tag origem:tag destino:tag</code>
+                    <button class="copy-btn" onclick="copyToClipboard('docker tag')">📋 Copiar</button>
+                </div>
+                <p class="description">Cria uma tag para uma imagem existente.</p>
+                <div class="examples">
+                    <h4>Exemplos:</h4>
+                    <div class="example-item">
+                        <code>docker tag minha-app:latest minha-app:v1.0</code>
+                        <span class="example-desc">Adiciona nova tag</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="command-card">
+                <h3>docker push</h3>
+                <div class="command-box">
+                    <code>docker push usuario/imagem:tag</code>
+                    <button class="copy-btn" onclick="copyToClipboard('docker push')">📋 Copiar</button>
+                </div>
+                <p class="description">Envia uma imagem para o Docker Hub ou outro registry.</p>
+                <div class="practice-footer">
+                    <p>⚠️ <strong>Importante:</strong> É necessário estar autenticado no Docker Hub para fazer push. Use <code class="inline-code">docker login</code> antes de executar este comando.</p>
+                </div>
+                <div class="examples">
+                    <h4>Exemplos:</h4>
+                    <div class="example-item">
+                        <code>docker login</code>
+                        <span class="example-desc">Faz login no Docker Hub</span>
+                    </div>
+                    <div class="example-item">
+                        <code>docker push otavioustra/minha-app:1.0</code>
+                        <span class="example-desc">Envia imagem para o registry</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Práticas -->
+        <section id="praticas" class="section">
+            <h2>🎯 Práticas do Mini-Curso</h2>
+            
+            <div class="practice-card" id="pratica-01">
+                <div class="practice-header">
+                    <span class="practice-number">Prática 01</span>
+                    <h3>Rodando Python no Docker</h3>
+                </div>
+                <div class="practice-content">
+                    <p class="practice-objective">
+                        <strong>Objetivo:</strong> Executar código Python dentro de um container Docker sem precisar instalar Python localmente.
+                    </p>
+                    <div class="steps">
+                        <h4>📝 Passo a Passo:</h4>
+                        <div class="step">
+                            <span class="step-number">1</span>
+                            <div class="step-content">
+                                <p>Rode a imagem do Python usando:</p>
+                                <div class="command-box">
+                                    <code>docker run -it python bash</code>
+                                    <button class="copy-btn" onclick="copyToClipboard('docker run -it python bash')">📋</button>
+                                </div>
+                                <p class="step-note">Este comando baixa a imagem do Python e abre o bash interativo.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">2</span>
+                            <div class="step-content">
+                                <p>Dentro do bash do container, rode o interpretador do Python:</p>
+                                <div class="command-box">
+                                    <code>python</code>
+                                    <button class="copy-btn" onclick="copyToClipboard('python')">📋</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">3</span>
+                            <div class="step-content">
+                                <p>Escreva um código em Python. Exemplo:</p>
+                                <div class="command-box">
+                                    <code>print("Hello, container!")</code>
+                                    <button class="copy-btn" onclick='copyToClipboard("print(\"Hello, container!\")")'>📋</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">4</span>
+                            <div class="step-content">
+                                <p>Saia do interpretador Python:</p>
+                                <div class="command-box">
+                                    <code>exit()</code>
+                                    <button class="copy-btn" onclick='copyToClipboard("exit()")'>📋</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">5</span>
+                            <div class="step-content">
+                                <p>Saia do bash do container:</p>
+                                <div class="command-box">
+                                    <code>exit</code>
+                                    <button class="copy-btn" onclick="copyToClipboard('exit')">📋</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="practice-footer">
+                        <p>✨ <strong>Dica:</strong> Você pode usar <code class="inline-code">Ctrl + D</code> como atalho para sair do Python ou do bash.</p>
+                    </div>
+                    
+                    <button class="complete-practice-btn" onclick="togglePracticeComplete('pratica-01')">
+                        Marcar como Concluída
+                    </button>
+                </div>
+            </div>
+
+            <div class="practice-card" id="pratica-02">
+                <div class="practice-header">
+                    <span class="practice-number">Prática 02</span>
+                    <h3>Dockerizando uma Aplicação Python</h3>
+                </div>
+                <div class="practice-content">
+                    <p class="practice-objective">
+                        <strong>Objetivo:</strong> Criar e executar uma aplicação Python containerizada que busca piadas de uma API.
+                    </p>
+                    
+                    <div class="practice-footer" style="margin-bottom: 20px;">
+                        <p>📁 <strong>Arquivos da aplicação:</strong> <a href="https://drive.google.com/drive/folders/1RxoWG-0xqF_YEzD1wxkO4w9lzwmGN38Q?usp=sharing" target="_blank" rel="noopener noreferrer" style="color: #2496ed; font-weight: bold;">Baixar do Google Drive</a></p>
+                    </div>
+                    
+                    <div class="steps">
+                        <h4>📝 Passo a Passo:</h4>
+                        
+                        <div class="step">
+                            <span class="step-number">1</span>
+                            <div class="step-content">
+                                <p><strong>Criar um Dockerfile:</strong></p>
+                                <p class="step-note">Crie um arquivo chamado <code class="inline-code">Dockerfile</code> (sem extensão) com o seguinte conteúdo:</p>
+                                <div class="command-box">
+                                    <code style="white-space: pre-line;">FROM python:3.10-slim
+WORKDIR /app
+COPY requirements.txt .
+COPY main.py .
+RUN pip install --no-cache-dir -r requirements.txt
+CMD ["python", "main.py"]</code>
+                                    <button class="copy-btn" onclick='copyToClipboard("FROM python:3.10-slim\nWORKDIR /app\nCOPY requirements.txt .\nCOPY main.py .\nRUN pip install --no-cache-dir -r requirements.txt\nCMD [\"python\", \"main.py\"]")'>📋</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="step">
+                            <span class="step-number">2</span>
+                            <div class="step-content">
+                                <p><strong>Criar o arquivo da aplicação (main.py):</strong></p>
+                                <div class="command-box">
+                                    <code style="white-space: pre-line;">import requests
+
+def get_joke():
+    url = "https://official-joke-api.appspot.com/random_joke"
+    response = requests.get(url)
+    if response.status_code == 200:
+        joke = response.json()
+        print(f"{joke['setup']} ... {joke['punchline']}")
+    else:
+        print("Não foi possível obter uma piada.")
+
+if __name__ == "__main__":
+    get_joke()</code>
+                                    <button class="copy-btn" onclick="copyToClipboard('main.py')">📋</button>
+                                </div>
+                                <p class="step-note">Código disponível na pasta APP_Piadas do projeto.</p>
+                            </div>
+                        </div>
+
+                        <div class="step">
+                            <span class="step-number">3</span>
+                            <div class="step-content">
+                                <p><strong>Criar o arquivo requirements.txt:</strong></p>
+                                <div class="command-box">
+                                    <code>requests</code>
+                                    <button class="copy-btn" onclick="copyToClipboard('requests')">📋</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="step">
+                            <span class="step-number">4</span>
+                            <div class="step-content">
+                                <p><strong>Criar uma imagem a partir do Dockerfile:</strong></p>
+                                <div class="command-box">
+                                    <code>docker build -t app-piadas .</code>
+                                    <button class="copy-btn" onclick='copyToClipboard("docker build -t app-piadas .")'>📋</button>
+                                </div>
+                                <p class="step-note">Este comando constrói a imagem Docker com o nome "app-piadas".</p>
+                            </div>
+                        </div>
+
+                        <div class="step">
+                            <span class="step-number">5</span>
+                            <div class="step-content">
+                                <p><strong>Criar conta no Docker Hub e publicar o repositório com a imagem:</strong></p>
+                                <div class="command-box">
+                                    <code>docker login</code>
+                                    <button class="copy-btn" onclick='copyToClipboard("docker login")'>📋</button>
+                                </div>
+                                <p class="step-note">Faça login com suas credenciais do Docker Hub.</p>
+                                <br>
+                                <div class="command-box">
+                                    <code>docker tag app-piadas seu-usuario/app-piadas:1.0</code>
+                                    <button class="copy-btn" onclick='copyToClipboard("docker tag app-piadas seu-usuario/app-piadas:1.0")'>📋</button>
+                                </div>
+                                <p class="step-note">Substitua "seu-usuario" pelo seu username do Docker Hub.</p>
+                                <br>
+                                <div class="command-box">
+                                    <code>docker push seu-usuario/app-piadas:1.0</code>
+                                    <button class="copy-btn" onclick='copyToClipboard("docker push seu-usuario/app-piadas:1.0")'>📋</button>
+                                </div>
+                                <p class="step-note">Publica a imagem no Docker Hub.</p>
+                            </div>
+                        </div>
+
+                        <div class="step">
+                            <span class="step-number">6</span>
+                            <div class="step-content">
+                                <p><strong>Executar a imagem guardada no Docker Hub:</strong></p>
+                                <div class="command-box">
+                                    <code>docker run seu-usuario/app-piadas:1.0</code>
+                                    <button class="copy-btn" onclick='copyToClipboard("docker run seu-usuario/app-piadas:1.0")'>📋</button>
+                                </div>
+                                <p class="step-note">Executa o container e exibe uma piada aleatória!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="practice-footer">
+                        <p>✨ <strong>Dica:</strong> Você pode executar várias vezes para obter piadas diferentes! Use <code class="inline-code">docker run app-piadas</code> localmente se já tiver a imagem construída.</p>
+                    </div>
+                    
+                    <button class="complete-practice-btn" onclick="togglePracticeComplete('pratica-02')">
+                        Marcar como Concluída
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Referências -->
+        <section id="referencias" class="section">
+            <h2>📖 Referências e Links Úteis</h2>
+            <div class="card">
+                <ul class="references-list">
+                    <li><a href="https://docs.docker.com/" target="_blank">📚 Documentação Oficial do Docker</a></li>
+                    <li><a href="https://hub.docker.com/" target="_blank">🐳 Docker Hub - Repositório de Imagens</a></li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <div class="footer-logo">
+                        <img src="if-logo.png" alt="IFTM - Instituto Federal do Triângulo Mineiro" class="if-logo">
+                    </div>
+                    <p class="footer-note">Desenvolvido durante a 22ª Semana Nacional de Ciência & Tecnologia</p>
+                </div>
+                <div class="footer-center">
+                    <p>Mini-Curso Docker - SNCT 2025</p>
+                    <p>IFTM Campus Ituiutaba</p>
+                </div>
+                <div class="footer-right">
+                    <p class="instructor-name">Instrutor: Otávio Kessler Ustra</p>
+                    <div class="contact-info">
+                        <a href="mailto:kesslerustra13012006@gmail.com" class="email-link" title="Email">
+                            kesslerustra13012006@gmail.com
+                        </a>
+                        <a href="https://www.linkedin.com/in/otavio-ustra-8b50bb364" target="_blank" rel="noopener noreferrer" class="linkedin-link" title="LinkedIn">
+                            <img src="linkedin.svg" alt="LinkedIn" class="linkedin-icon">
+                            LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button id="backToTop" onclick="scrollToTop()">↑</button>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+# Arquivos de sistema e temporários
+.DS_Store
+Thumbs.db
+
+# Node modules (caso adicione no futuro)
+node_modules/
+
+# Logs
+*.log
+
+# Arquivos do editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Arquivos temporários do Windows
+desktop.ini
+$RECYCLE.BIN/
