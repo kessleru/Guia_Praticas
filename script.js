@@ -1,3 +1,24 @@
+// Loading Screen
+window.addEventListener('load', () => {
+    const loadingScreen = document.getElementById('loading-screen');
+    
+    // Simulate minimum loading time for better UX
+    setTimeout(() => {
+        loadingScreen.classList.add('fade-out');
+        
+        // Remove from DOM after fade out
+        setTimeout(() => {
+            loadingScreen.remove();
+        }, 500);
+    }, 1500); // 1.5 seconds minimum
+    
+    pageLoadTime = performance.now();
+    console.log(`⚡ Página carregada em ${Math.round(pageLoadTime)}ms`);
+    
+    // Load practice states from localStorage
+    loadPracticeStates();
+});
+
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -407,13 +428,41 @@ function loadPracticeStates() {
 // Add performance monitoring
 let pageLoadTime = 0;
 
-window.addEventListener('load', () => {
-    pageLoadTime = performance.now();
-    console.log(`⚡ Página carregada em ${Math.round(pageLoadTime)}ms`);
+// Switch between terminal tabs (PowerShell / Ubuntu WSL)
+function switchTerminal(terminalType) {
+    // Remove active class from all tabs and contents
+    document.querySelectorAll('.terminal-tab').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    document.querySelectorAll('.terminal-content').forEach(content => {
+        content.classList.remove('active');
+    });
     
-    // Load practice states from localStorage
-    loadPracticeStates();
-});
+    // Add active class to selected tab and content
+    if (terminalType === 'powershell') {
+        document.querySelector('.terminal-tab:first-child').classList.add('active');
+        document.getElementById('powershell-content').classList.add('active');
+    } else if (terminalType === 'ubuntu') {
+        document.querySelector('.terminal-tab:last-child').classList.add('active');
+        document.getElementById('ubuntu-content').classList.add('active');
+    }
+}
+
+// Toggle Dockerfile Secret Guide
+function toggleDockerfileGuide() {
+    const button = document.querySelector('.secret-toggle');
+    const content = document.getElementById('dockerfile-guide');
+    
+    button.classList.toggle('active');
+    content.classList.toggle('active');
+    
+    // Scroll smoothly to the guide when opening
+    if (content.classList.contains('active')) {
+        setTimeout(() => {
+            content.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
+    }
+}
 
 // Add error handling for images (if you add images later)
 document.addEventListener('error', (e) => {

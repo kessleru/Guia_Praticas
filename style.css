@@ -20,6 +20,165 @@
     --shadow-hover: 0 5px 20px rgba(0, 0, 0, 0.15);
 }
 
+/* Loading Screen */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #2496ed 0%, #1d7fcc 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+#loading-screen.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loading-container {
+    text-align: center;
+    color: white;
+}
+
+.docker-whale {
+    position: relative;
+    animation: sailing 4s ease-in-out infinite;
+    margin-bottom: 50px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.docker-whale img {
+    position: relative;
+    z-index: 10;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+    animation: bobbing 2s ease-in-out infinite;
+}
+
+@keyframes sailing {
+    0%, 100% {
+        transform: translateX(-20px);
+    }
+    50% {
+        transform: translateX(20px);
+    }
+}
+
+@keyframes bobbing {
+    0%, 100% {
+        transform: translateY(0px) rotate(-2deg);
+    }
+    50% {
+        transform: translateY(-15px) rotate(2deg);
+    }
+}
+
+.ocean-wave {
+    position: absolute;
+    bottom: 20px;
+    width: 200px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    animation: wave 3s ease-in-out infinite;
+}
+
+.ocean-wave.wave1 {
+    left: 50%;
+    transform: translateX(-50%);
+    animation-delay: 0s;
+}
+
+.ocean-wave.wave2 {
+    left: 50%;
+    transform: translateX(-50%);
+    animation-delay: 0.5s;
+    opacity: 0.7;
+}
+
+.ocean-wave.wave3 {
+    left: 50%;
+    transform: translateX(-50%);
+    animation-delay: 1s;
+    opacity: 0.4;
+}
+
+@keyframes wave {
+    0%, 100% {
+        transform: translateX(-50%) scaleX(1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: translateX(-50%) scaleX(1.5);
+        opacity: 0.2;
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.loading-text h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.loading-text p {
+    font-size: 1.1em;
+    opacity: 0.9;
+    margin-bottom: 30px;
+}
+
+.loading-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.loading-dots span {
+    width: 12px;
+    height: 12px;
+    background: white;
+    border-radius: 50%;
+    animation: bounce 1.4s ease-in-out infinite;
+}
+
+.loading-dots span:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.loading-dots span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.loading-dots span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+    0%, 80%, 100% {
+        transform: scale(0.8);
+        opacity: 0.5;
+    }
+    40% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
@@ -483,6 +642,252 @@ main {
     border-radius: 5px;
 }
 
+/* Demo Docker Compose Section */
+.demo-card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    margin-bottom: 30px;
+    overflow: hidden;
+    border: 2px solid #e0e0e0;
+}
+
+.demo-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 25px;
+    color: white;
+}
+
+.demo-number {
+    background: rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 700;
+    display: inline-block;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    backdrop-filter: blur(10px);
+}
+
+.demo-header h3 {
+    font-size: 1.8em;
+    margin: 0;
+}
+
+.demo-content {
+    padding: 30px;
+}
+
+.demo-objective {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 5px solid #667eea;
+    margin-bottom: 30px;
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+.demo-architecture {
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 25px;
+    margin: 25px 0;
+}
+
+.demo-architecture h4 {
+    color: #667eea;
+    margin-bottom: 20px;
+    font-size: 1.4em;
+}
+
+.architecture-diagram {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin: 30px 0;
+    flex-wrap: wrap;
+}
+
+.arch-box {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border: 3px solid;
+    border-radius: 15px;
+    padding: 25px;
+    min-width: 200px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.arch-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.frontend-box {
+    border-color: #667eea;
+}
+
+.backend-box {
+    border-color: #28a745;
+}
+
+.box-title {
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.frontend-box .box-title {
+    color: #667eea;
+}
+
+.backend-box .box-title {
+    color: #28a745;
+}
+
+.box-port {
+    font-family: 'Courier New', monospace;
+    background: #2d3748;
+    color: #48bb78;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.arch-arrow {
+    font-size: 2.5em;
+    color: #667eea;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.6;
+        transform: scale(1.1);
+    }
+}
+
+.arch-note {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    margin-top: 20px;
+    font-size: 1.05em;
+}
+
+.demo-features {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 25px;
+    margin: 25px 0;
+}
+
+.demo-features h4 {
+    color: #667eea;
+    margin-bottom: 15px;
+    font-size: 1.4em;
+}
+
+.features-list {
+    list-style: none;
+    padding: 0;
+}
+
+.features-list li {
+    padding: 12px 0;
+    font-size: 1.1em;
+    color: #555;
+    line-height: 1.6;
+}
+
+.demo-steps {
+    margin-top: 30px;
+}
+
+.demo-steps h4 {
+    color: #667eea;
+    margin-bottom: 20px;
+    font-size: 1.4em;
+}
+
+.demo-footer {
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+    border-left: 5px solid #28a745;
+    padding: 20px;
+    margin-top: 30px;
+    border-radius: 8px;
+    font-size: 1.1em;
+}
+
+.demo-footer strong {
+    color: #155724;
+}
+
+/* Terminal Tabs */
+.terminal-tabs {
+    display: flex;
+    gap: 10px;
+    margin: 15px 0;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.terminal-tab {
+    background: transparent;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    color: #666;
+    transition: all 0.3s ease;
+    border-bottom: 3px solid transparent;
+    position: relative;
+    bottom: -2px;
+}
+
+.terminal-tab:hover {
+    color: var(--primary-color);
+    background: rgba(52, 152, 219, 0.05);
+}
+
+.terminal-tab.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+    background: rgba(52, 152, 219, 0.1);
+}
+
+.terminal-content {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.terminal-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .add-practice-btn {
     background: linear-gradient(135deg, var(--success-color) 0%, #218838 100%);
     color: white;
@@ -535,6 +940,146 @@ main {
 .mini-command-card p {
     color: var(--text-light);
     font-size: 0.9em;
+}
+
+/* Dockerfile Guide */
+.dockerfile-secret {
+    margin: 25px 0;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--card-bg);
+    box-shadow: var(--shadow);
+}
+
+.secret-toggle {
+    width: 100%;
+    padding: 15px 20px;
+    background: #28a745;
+    border: none;
+    color: white;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.secret-toggle:hover {
+    background: #218838;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+}
+
+.secret-toggle span:first-child {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.toggle-icon {
+    font-size: 1.2em;
+    position: absolute;
+    right: 20px;
+    transition: transform 0.3s ease;
+}
+
+.secret-toggle.active .toggle-icon {
+    transform: rotate(180deg);
+}
+
+.secret-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+    padding: 0 20px;
+    background: white;
+}
+
+.secret-content.active {
+    max-height: 5000px;
+    padding: 30px 20px;
+}
+
+.secret-content h4 {
+    color: #ff6f00;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    text-align: center;
+    border-bottom: 3px solid #ffc107;
+    padding-bottom: 10px;
+}
+
+.dockerfile-command {
+    background: #f8f9fa;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #28a745;
+    transition: all 0.3s ease;
+}
+
+.dockerfile-command:hover {
+    background: #fff;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transform: translateX(5px);
+}
+
+.command-title {
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-family: 'Courier New', monospace;
+    background: #28a745;
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 5px;
+    color: white;
+}
+
+.dockerfile-command p {
+    margin: 10px 0;
+}
+
+.dockerfile-command strong {
+    color: #28a745;
+}
+
+.dockerfile-best-practices {
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-color);
+    margin-top: 30px;
+}
+
+.dockerfile-best-practices h5 {
+    color: var(--primary-color);
+    font-size: 1.3em;
+    margin-bottom: 15px;
+}
+
+.dockerfile-best-practices ul {
+    list-style: none;
+    padding: 0;
+}
+
+.dockerfile-best-practices li {
+    padding: 8px 0;
+    color: #333;
+    font-size: 1em;
+    line-height: 1.6;
+}
+
+.dockerfile-best-practices code {
+    background: rgba(36, 150, 237, 0.1);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    color: var(--primary-color);
 }
 
 /* References */
@@ -618,12 +1163,6 @@ footer {
     height: auto;
     filter: brightness(0) invert(1);
     opacity: 0.9;
-    transition: all 0.3s ease;
-}
-
-.if-logo:hover {
-    opacity: 1;
-    transform: scale(1.05);
 }
 
 .instructor-name {

@@ -7,6 +7,18 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loading-container">
+            <div class="docker-whale"><img src="docker-baleia.png" alt="Docker Whale" width="150"><div class="ocean-wave wave1"></div><div class="ocean-wave wave2"></div><div class="ocean-wave wave3"></div></div>
+            <div class="loading-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+
     <header>
         <div class="container">
             <div class="header-banner">
@@ -27,6 +39,7 @@
                 <li><a href="#gerenciamento">Containers</a></li>
                 <li><a href="#imagens">Imagens</a></li>
                 <li><a href="#praticas">Práticas</a></li>
+                <li><a href="#demo-compose">Demo Compose</a></li>
                 <li><a href="#referencias">Links</a></li>
             </ul>
         </div>
@@ -381,10 +394,6 @@
                     <div class="practice-footer">
                         <p>✨ <strong>Dica:</strong> Você pode usar <code class="inline-code">Ctrl + D</code> como atalho para sair do Python ou do bash.</p>
                     </div>
-                    
-                    <button class="complete-practice-btn" onclick="togglePracticeComplete('pratica-01')">
-                        Marcar como Concluída
-                    </button>
                 </div>
             </div>
 
@@ -418,6 +427,66 @@ COPY main.py .
 RUN pip install --no-cache-dir -r requirements.txt
 CMD ["python", "main.py"]</code>
                                     <button class="copy-btn" onclick='copyToClipboard("FROM python:3.10-slim\nWORKDIR /app\nCOPY requirements.txt .\nCOPY main.py .\nRUN pip install --no-cache-dir -r requirements.txt\nCMD [\"python\", \"main.py\"]")'>📋</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Dockerfile Commands Guide -->
+                        <div class="dockerfile-secret">
+                            <button class="secret-toggle" onclick="toggleDockerfileGuide()">
+                                <span>Comandos do Dockerfile</span>
+                                <span class="toggle-icon">▼</span>
+                            </button>
+                            <div class="secret-content" id="dockerfile-guide">
+                                
+                                <div class="dockerfile-command">
+                                    <div class="command-title">FROM</div>
+                                    <p><strong>Função:</strong> Define a imagem base do container</p>
+                                    <div class="command-box">
+                                        <code>FROM python:3.10-slim</code>
+                                        <button class="copy-btn" onclick='copyToClipboard("FROM python:3.10-slim")'>📋</button>
+                                    </div>
+                                    <p class="step-note">💡 Sempre a primeira instrução. Define o sistema operacional e ambiente base.</p>
+                                </div>
+
+                                <div class="dockerfile-command">
+                                    <div class="command-title">WORKDIR</div>
+                                    <p><strong>Função:</strong> Define o diretório de trabalho no container</p>
+                                    <div class="command-box">
+                                        <code>WORKDIR /app</code>
+                                        <button class="copy-btn" onclick='copyToClipboard("WORKDIR /app")'>📋</button>
+                                    </div>
+                                    <p class="step-note">💡 Cria o diretório se não existir. Todos os comandos seguintes executam aqui.</p>
+                                </div>
+
+                                <div class="dockerfile-command">
+                                    <div class="command-title">COPY</div>
+                                    <p><strong>Função:</strong> Copia arquivos do host para o container</p>
+                                    <div class="command-box">
+                                        <code>COPY arquivo.txt /destino/</code>
+                                        <button class="copy-btn" onclick='copyToClipboard("COPY arquivo.txt /destino/")'>📋</button>
+                                    </div>
+                                    <p class="step-note">💡 Use <code>.</code> para copiar para o diretório atual (WORKDIR).</p>
+                                </div>
+
+                                <div class="dockerfile-command">
+                                    <div class="command-title">RUN</div>
+                                    <p><strong>Função:</strong> Executa comandos durante a construção da imagem</p>
+                                    <div class="command-box">
+                                        <code>RUN pip install requests</code>
+                                        <button class="copy-btn" onclick='copyToClipboard("RUN pip install requests")'>📋</button>
+                                    </div>
+                                    <p class="step-note">💡 Cada RUN cria uma nova camada na imagem. Combine comandos com <code>&&</code> para reduzir camadas.</p>
+                                </div>
+
+                                <div class="dockerfile-command">
+                                    <div class="command-title">CMD</div>
+                                    <p><strong>Função:</strong> Define o comando padrão ao iniciar o container</p>
+                                    <div class="command-box">
+                                        <code>CMD ["python", "main.py"]</code>
+                                        <button class="copy-btn" onclick='copyToClipboard("CMD [\"python\", \"main.py\"]")'>📋</button>
+                                    </div>
+                                    <p class="step-note">💡 Pode ser sobrescrito ao executar <code>docker run</code>. Apenas um CMD por Dockerfile.</p>
                                 </div>
                             </div>
                         </div>
@@ -460,17 +529,48 @@ if __name__ == "__main__":
                         <div class="step">
                             <span class="step-number">4</span>
                             <div class="step-content">
-                                <p><strong>Criar uma imagem a partir do Dockerfile:</strong></p>
-                                <div class="command-box">
-                                    <code>docker build -t app-piadas .</code>
-                                    <button class="copy-btn" onclick='copyToClipboard("docker build -t app-piadas .")'>📋</button>
+                                <p><strong>Navegar até a pasta do projeto no terminal:</strong></p>
+                                
+                                <div class="terminal-tabs">
+                                    <button class="terminal-tab active" onclick="switchTerminal('powershell')">🪟 PowerShell</button>
+                                    <button class="terminal-tab" onclick="switchTerminal('ubuntu')">🐧 Ubuntu WSL</button>
                                 </div>
-                                <p class="step-note">Este comando constrói a imagem Docker com o nome "app-piadas".</p>
+
+                                <div id="powershell-content" class="terminal-content active">
+                                    <p class="step-note">Navegue usando caminhos do Windows:</p>
+                                    <div class="command-box">
+                                        <code>cd C:\Users\SeuCpf\Desktop\app-piadas</code>
+                                        <button class="copy-btn" onclick='copyToClipboard("cd C:\\Users\\SeuCpf\\Desktop\\app-piadas")'>📋</button>
+                                    </div>
+                                    <p class="step-note">💡 Exemplo: <code>cd C:\Users\12345678900\Desktop\app-piadas</code></p>
+                                </div>
+
+                                <div id="ubuntu-content" class="terminal-content">
+                                    <p class="step-note">O WSL monta os discos do Windows em <code>/mnt/c/</code>, <code>/mnt/d/</code>, etc:</p>
+                                    <div class="command-box">
+                                        <code>cd /mnt/c/Users/SeuCpf/Desktop/app-piadas</code>
+                                        <button class="copy-btn" onclick='copyToClipboard("cd /mnt/c/Users/SeuCpf/Desktop/app-piadas")'>📋</button>
+                                    </div>
+                                    <p class="step-note">💡 Exemplo: <code>cd /mnt/c/Users/12345678900/Desktop/app-piadas</code></p>
+                                    <p class="step-note">⚠️ Note: use <code>/mnt/c/</code> no lugar de <code>C:\</code> e barras <code>/</code> no lugar de <code>\</code></p>
+                                </div>
                             </div>
                         </div>
 
                         <div class="step">
                             <span class="step-number">5</span>
+                            <div class="step-content">
+                                <p><strong>Criar uma imagem a partir do Dockerfile:</strong></p>
+                                <div class="command-box">
+                                    <code>docker build -t app-piadas .</code>
+                                    <button class="copy-btn" onclick='copyToClipboard("docker build -t app-piadas .")'>📋</button>
+                                </div>
+                                <p class="step-note">Este comando constrói a imagem Docker com o nome "app-piadas". O ponto (.) indica o diretório atual.</p>
+                            </div>
+                        </div>
+
+                        <div class="step">
+                            <span class="step-number">6</span>
                             <div class="step-content">
                                 <p><strong>Criar conta no Docker Hub e publicar o repositório com a imagem:</strong></p>
                                 <div class="command-box">
@@ -494,7 +594,7 @@ if __name__ == "__main__":
                         </div>
 
                         <div class="step">
-                            <span class="step-number">6</span>
+                            <span class="step-number">7</span>
                             <div class="step-content">
                                 <p><strong>Executar a imagem guardada no Docker Hub:</strong></p>
                                 <div class="command-box">
@@ -509,10 +609,100 @@ if __name__ == "__main__":
                     <div class="practice-footer">
                         <p>✨ <strong>Dica:</strong> Você pode executar várias vezes para obter piadas diferentes! Use <code class="inline-code">docker run app-piadas</code> localmente se já tiver a imagem construída.</p>
                     </div>
-                    
-                    <button class="complete-practice-btn" onclick="togglePracticeComplete('pratica-02')">
-                        Marcar como Concluída
-                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Demo Docker Compose -->
+        <section id="demo-compose" class="section">
+            <h2>🚀 Demonstração: Docker Compose</h2>
+            <div class="demo-card">
+                <div class="demo-header">
+                    <span class="demo-number">Demo</span>
+                    <h3>Docker Compose - Aplicação Multi-Container</h3>
+                </div>
+                <div class="demo-content">
+                    <div class="demo-architecture">
+                        <h4>🏗️ Arquitetura do Exemplo:</h4>
+                        <div class="architecture-diagram">
+                            <div class="arch-box frontend-box">
+                                <div class="box-title">🌐 Frontend</div>
+                                <p>Nginx</p>
+                                <p class="box-port">Porta: 8080</p>
+                            </div>
+                            <div class="arch-arrow">↔️</div>
+                            <div class="arch-box backend-box">
+                                <div class="box-title">⚙️ Backend</div>
+                                <p>Flask API</p>
+                                <p class="box-port">Porta: 5000</p>
+                            </div>
+                        </div>
+                        <p class="arch-note">💡 Os containers se comunicam através de uma rede Docker compartilhada</p>
+                    </div>
+
+                    <div class="demo-features">
+                        <h4>✨ O que este exemplo demonstra:</h4>
+                        <ul class="features-list">
+                            <li>✅ Comunicação entre containers (Frontend ↔️ Backend)</li>
+                            <li>✅ Rede Docker isolada para os serviços</li>
+                            <li>✅ API REST com Flask retornando dados JSON</li>
+                            <li>✅ Interface web consumindo a API</li>
+                            <li>✅ Orquestração com docker-compose.yml</li>
+                        </ul>
+                    </div>
+
+                    <div class="demo-steps">
+                        <h4>📝 Como executar:</h4>
+                        <div class="step">
+                            <span class="step-number">1</span>
+                            <div class="step-content">
+                                <p>Navegue até a pasta do demo:</p>
+                                <div class="command-box">
+                                    <code>cd demo-compose</code>
+                                    <button class="copy-btn" onclick='copyToClipboard("cd demo-compose")'>📋</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="step">
+                            <span class="step-number">2</span>
+                            <div class="step-content">
+                                <p>Suba os containers:</p>
+                                <div class="command-box">
+                                    <code>docker-compose up --build</code>
+                                    <button class="copy-btn" onclick='copyToClipboard("docker-compose up --build")'>📋</button>
+                                </div>
+                                <p class="step-note">Este comando constrói as imagens e inicia todos os serviços</p>
+                            </div>
+                        </div>
+
+                        <div class="step">
+                            <span class="step-number">3</span>
+                            <div class="step-content">
+                                <p>Acesse no navegador:</p>
+                                <div class="command-box">
+                                    <code>http://localhost:8080</code>
+                                    <button class="copy-btn" onclick='copyToClipboard("http://localhost:8080")'>📋</button>
+                                </div>
+                                <p class="step-note">Você verá uma interface interativa para testar a API!</p>
+                            </div>
+                        </div>
+
+                        <div class="step">
+                            <span class="step-number">4</span>
+                            <div class="step-content">
+                                <p>Para parar os containers:</p>
+                                <div class="command-box">
+                                    <code>docker-compose down</code>
+                                    <button class="copy-btn" onclick='copyToClipboard("docker-compose down")'>📋</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="demo-footer">
+                        <p>🎯 <strong>Objetivo:</strong> Demonstrar como o Docker Compose simplifica a execução de aplicações com múltiplos serviços, ideal para ambientes de desenvolvimento e testes.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -563,3 +753,4 @@ if __name__ == "__main__":
     <script src="script.js"></script>
 </body>
 </html>
+
