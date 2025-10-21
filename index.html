@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mini-Curso Docker - SNCT 2025</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <!-- Loading Screen -->
     <div id="loading-screen">
         <div class="loading-container">
-            <div class="docker-whale"><img src="docker-baleia.png" alt="Docker Whale" width="150"><div class="ocean-wave wave1"></div><div class="ocean-wave wave2"></div><div class="ocean-wave wave3"></div></div>
+            <div class="docker-whale"><img src="images/docker-baleia.png" alt="Docker Whale" width="150"><div class="ocean-wave wave1"></div><div class="ocean-wave wave2"></div><div class="ocean-wave wave3"></div></div>
             <div class="loading-dots">
                 <span></span>
                 <span></span>
@@ -22,7 +23,7 @@
     <header>
         <div class="container">
             <div class="header-banner">
-                <img src="snct-banner.png" alt="22ª Semana Nacional de Ciência & Tecnologia - 20 e 21 de Outubro de 2025" class="event-banner">
+                <img src="images/snct-banner.png" alt="22ª Semana Nacional de Ciência & Tecnologia - 20 e 21 de Outubro de 2025" class="event-banner">
             </div>
             <div class="header-content">
                 <h1>Mini-Curso Docker</h1>
@@ -560,11 +561,41 @@ if __name__ == "__main__":
                             <span class="step-number">5</span>
                             <div class="step-content">
                                 <p><strong>Criar uma imagem a partir do Dockerfile:</strong></p>
-                                <div class="command-box">
-                                    <code>docker build -t app-piadas .</code>
-                                    <button class="copy-btn" onclick='copyToClipboard("docker build -t app-piadas .")'>📋</button>
+                                
+                                <div class="terminal-tabs">
+                                    <button class="terminal-tab active" onclick="switchArchitecture('original')">🖥️ Original (Host)</button>
+                                    <button class="terminal-tab" onclick="switchArchitecture('arm64')">🍎 ARM64</button>
+                                    <button class="terminal-tab" onclick="switchArchitecture('armv7')">🥧 ARM/v7</button>
                                 </div>
-                                <p class="step-note">Este comando constrói a imagem Docker com o nome "app-piadas". O ponto (.) indica o diretório atual.</p>
+
+                                <div id="original-arch" class="terminal-content active">
+                                    <p class="step-note">Cria a imagem usando a arquitetura do seu sistema (padrão):</p>
+                                    <div class="command-box">
+                                        <code>docker build -t app-piadas .</code>
+                                        <button class="copy-btn" onclick='copyToClipboard("docker build -t app-piadas .")'>📋</button>
+                                    </div>
+                                    <p class="step-note">💡 Detecta automaticamente a arquitetura do host (Windows, Mac Intel, Mac M1, etc.)</p>
+                                </div>
+
+                                <div id="arm64-arch" class="terminal-content">
+                                    <p class="step-note">Cria a imagem para arquitetura ARM64 (Mac M1/M2, servidores ARM):</p>
+                                    <div class="command-box">
+                                        <code>docker build --platform linux/arm64 -t app-piadas .</code>
+                                        <button class="copy-btn" onclick='copyToClipboard("docker build --platform linux/arm64 -t app-piadas .")'>📋</button>
+                                    </div>
+                                    <p class="step-note">💡 Útil para deploy em servidores ARM ou Mac com chip Apple Silicon</p>
+                                </div>
+
+                                <div id="armv7-arch" class="terminal-content">
+                                    <p class="step-note">Cria a imagem para arquitetura ARM/v7 (Raspberry Pi 3/4):</p>
+                                    <div class="command-box">
+                                        <code>docker build --platform linux/arm/v7 -t app-piadas .</code>
+                                        <button class="copy-btn" onclick='copyToClipboard("docker build --platform linux/arm/v7 -t app-piadas .")'>📋</button>
+                                    </div>
+                                    <p class="step-note">💡 Perfeito para rodar em dispositivos IoT como Raspberry Pi</p>
+                                </div>
+                                
+                                <p class="step-note" style="margin-top: 15px;">ℹ️ O ponto (.) indica o diretório atual onde está o Dockerfile.</p>
                             </div>
                         </div>
 
@@ -629,7 +660,7 @@ if __name__ == "__main__":
             <div class="footer-content">
                 <div class="footer-left">
                     <div class="footer-logo">
-                        <img src="if-logo.png" alt="IFTM - Instituto Federal do Triângulo Mineiro" class="if-logo">
+                        <img src="images/if-logo.png" alt="IFTM - Instituto Federal do Triângulo Mineiro" class="if-logo">
                     </div>
                     <p class="footer-note">Desenvolvido durante a 22ª Semana Nacional de Ciência & Tecnologia</p>
                 </div>
@@ -644,7 +675,7 @@ if __name__ == "__main__":
                             kesslerustra13012006@gmail.com
                         </a>
                         <a href="https://www.linkedin.com/in/otavio-ustra-8b50bb364" target="_blank" rel="noopener noreferrer" class="linkedin-link" title="LinkedIn">
-                            <img src="linkedin.svg" alt="LinkedIn" class="linkedin-icon">
+                            <img src="images/linkedin.svg" alt="LinkedIn" class="linkedin-icon">
                             LinkedIn
                         </a>
                     </div>
@@ -655,7 +686,7 @@ if __name__ == "__main__":
 
     <button id="backToTop" onclick="scrollToTop()">↑</button>
 
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
 

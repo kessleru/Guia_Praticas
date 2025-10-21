@@ -430,20 +430,23 @@ let pageLoadTime = 0;
 
 // Switch between terminal tabs (PowerShell / Ubuntu WSL)
 function switchTerminal(terminalType) {
-    // Remove active class from all tabs and contents
-    document.querySelectorAll('.terminal-tab').forEach(tab => {
+    // Get the parent step containing terminal tabs (step 4)
+    const terminalStep = document.querySelector('#powershell-content, #ubuntu-content').closest('.step');
+    
+    // Remove active class from all tabs and contents within this step
+    terminalStep.querySelectorAll('.terminal-tab').forEach(tab => {
         tab.classList.remove('active');
     });
-    document.querySelectorAll('.terminal-content').forEach(content => {
+    terminalStep.querySelectorAll('.terminal-content').forEach(content => {
         content.classList.remove('active');
     });
     
     // Add active class to selected tab and content
     if (terminalType === 'powershell') {
-        document.querySelector('.terminal-tab:first-child').classList.add('active');
+        terminalStep.querySelector('.terminal-tab:nth-child(1)').classList.add('active');
         document.getElementById('powershell-content').classList.add('active');
     } else if (terminalType === 'ubuntu') {
-        document.querySelector('.terminal-tab:last-child').classList.add('active');
+        terminalStep.querySelector('.terminal-tab:nth-child(2)').classList.add('active');
         document.getElementById('ubuntu-content').classList.add('active');
     }
 }
@@ -461,6 +464,32 @@ function toggleDockerfileGuide() {
         setTimeout(() => {
             content.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }, 100);
+    }
+}
+
+// Switch between architecture tabs
+function switchArchitecture(archType) {
+    // Get the parent step containing architecture tabs (step 5)
+    const archStep = document.querySelector('#original-arch, #arm64-arch, #armv7-arch').closest('.step');
+    
+    // Remove active class from all tabs and contents within this step
+    archStep.querySelectorAll('.terminal-tab').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    archStep.querySelectorAll('.terminal-content').forEach(content => {
+        content.classList.remove('active');
+    });
+    
+    // Add active class to selected tab and content
+    if (archType === 'original') {
+        archStep.querySelector('.terminal-tab:nth-child(1)').classList.add('active');
+        document.getElementById('original-arch').classList.add('active');
+    } else if (archType === 'arm64') {
+        archStep.querySelector('.terminal-tab:nth-child(2)').classList.add('active');
+        document.getElementById('arm64-arch').classList.add('active');
+    } else if (archType === 'armv7') {
+        archStep.querySelector('.terminal-tab:nth-child(3)').classList.add('active');
+        document.getElementById('armv7-arch').classList.add('active');
     }
 }
 
