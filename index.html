@@ -39,7 +39,6 @@
                 <li><a href="#gerenciamento">Containers</a></li>
                 <li><a href="#imagens">Imagens</a></li>
                 <li><a href="#praticas">Práticas</a></li>
-                <li><a href="#demo-compose">Demo Compose</a></li>
                 <li><a href="#referencias">Links</a></li>
             </ul>
         </div>
@@ -608,100 +607,6 @@ if __name__ == "__main__":
 
                     <div class="practice-footer">
                         <p>✨ <strong>Dica:</strong> Você pode executar várias vezes para obter piadas diferentes! Use <code class="inline-code">docker run app-piadas</code> localmente se já tiver a imagem construída.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Demo Docker Compose -->
-        <section id="demo-compose" class="section">
-            <h2>🚀 Demonstração: Docker Compose</h2>
-            <div class="demo-card">
-                <div class="demo-header">
-                    <span class="demo-number">Demo</span>
-                    <h3>Docker Compose - Aplicação Multi-Container</h3>
-                </div>
-                <div class="demo-content">
-                    <div class="demo-architecture">
-                        <h4>🏗️ Arquitetura do Exemplo:</h4>
-                        <div class="architecture-diagram">
-                            <div class="arch-box frontend-box">
-                                <div class="box-title">🌐 Frontend</div>
-                                <p>Nginx</p>
-                                <p class="box-port">Porta: 8080</p>
-                            </div>
-                            <div class="arch-arrow">↔️</div>
-                            <div class="arch-box backend-box">
-                                <div class="box-title">⚙️ Backend</div>
-                                <p>Flask API</p>
-                                <p class="box-port">Porta: 5000</p>
-                            </div>
-                        </div>
-                        <p class="arch-note">💡 Os containers se comunicam através de uma rede Docker compartilhada</p>
-                    </div>
-
-                    <div class="demo-features">
-                        <h4>✨ O que este exemplo demonstra:</h4>
-                        <ul class="features-list">
-                            <li>✅ Comunicação entre containers (Frontend ↔️ Backend)</li>
-                            <li>✅ Rede Docker isolada para os serviços</li>
-                            <li>✅ API REST com Flask retornando dados JSON</li>
-                            <li>✅ Interface web consumindo a API</li>
-                            <li>✅ Orquestração com docker-compose.yml</li>
-                        </ul>
-                    </div>
-
-                    <div class="demo-steps">
-                        <h4>📝 Como executar:</h4>
-                        <div class="step">
-                            <span class="step-number">1</span>
-                            <div class="step-content">
-                                <p>Navegue até a pasta do demo:</p>
-                                <div class="command-box">
-                                    <code>cd demo-compose</code>
-                                    <button class="copy-btn" onclick='copyToClipboard("cd demo-compose")'>📋</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="step">
-                            <span class="step-number">2</span>
-                            <div class="step-content">
-                                <p>Suba os containers:</p>
-                                <div class="command-box">
-                                    <code>docker-compose up --build</code>
-                                    <button class="copy-btn" onclick='copyToClipboard("docker-compose up --build")'>📋</button>
-                                </div>
-                                <p class="step-note">Este comando constrói as imagens e inicia todos os serviços</p>
-                            </div>
-                        </div>
-
-                        <div class="step">
-                            <span class="step-number">3</span>
-                            <div class="step-content">
-                                <p>Acesse no navegador:</p>
-                                <div class="command-box">
-                                    <code>http://localhost:8080</code>
-                                    <button class="copy-btn" onclick='copyToClipboard("http://localhost:8080")'>📋</button>
-                                </div>
-                                <p class="step-note">Você verá uma interface interativa para testar a API!</p>
-                            </div>
-                        </div>
-
-                        <div class="step">
-                            <span class="step-number">4</span>
-                            <div class="step-content">
-                                <p>Para parar os containers:</p>
-                                <div class="command-box">
-                                    <code>docker-compose down</code>
-                                    <button class="copy-btn" onclick='copyToClipboard("docker-compose down")'>📋</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="demo-footer">
-                        <p>🎯 <strong>Objetivo:</strong> Demonstrar como o Docker Compose simplifica a execução de aplicações com múltiplos serviços, ideal para ambientes de desenvolvimento e testes.</p>
                     </div>
                 </div>
             </div>
